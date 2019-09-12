@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>File Server</title>
+        <link rel="stylesheet" href="/static/sheet.css">
+    </head>
+    <body>
+        <div id="header">
+                Flask File Server
+        </div>
+        <a href="">
+            <div id="manage">
+            MANAGE
+            </div>
+        </a>
+        <div id="menu">
+            <!--<form method="GET" action="/delete/">
+                <span class="s">File To Delete</span> <input type="text" name="delete" size="20" />
+                <input type="submit" value="Delete" />
+            </form>-->
+            <form action="/upload/" method="POST" 
+                    enctype="multipart/form-data">
+                <span class="s">Upload File</span> <br />
+                <input type="file" name="file" />
+                <input type="submit" value="Upload" />
+            </form>
+            <br />
+            <span class="s">System Informations:</span> <br />
+            {% for line in inf %}
+                <p>{{line}}</p>
+            {% endfor %}
+            <br />
+            <p><span class="s">Data Size:</span> {{current_size}} kB / {{max_size}} kB</p>
+            <p><span class="s">Max File Size: </span>{{max_upload_size}} MB</p>
+        </div>
+        <div id="content">
+            <!--<form method="GET" action="/file/">
+                {% for file in dict %}
+                <span style="padding: inherit; margin: 1%;"><input type="submit" name="file" value="{{file}}" class="filebutton" />&nbsp; {{dict[file]}} kB</span>
+                {% endfor %}
+            </form>-->
+            <form method="GET" action="/file/">
+                {% for file in dict %}
+                     <p>
+                         {{file}} &nbsp; &nbsp; &nbsp; Size: {{dict[file]}} kB
+                         <button class="dow" type="submit" name="file" value="{{file}}">Download</button>
+                         <button class="del" type="submit" name="delete" value="{{file}}">
+                         Delete</button>
+                     </p>
+                {% endfor %}
+            </form>
+        </div>
+        <div id="footer">
+            Created by <a href="/zodiacc/" target="_blank">TheZodiaCC</a>
+        </div>
+    </body>
+</html>
